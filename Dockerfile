@@ -15,12 +15,9 @@ COPY . .
 # Компилируем статический бинарник
 RUN CGO_ENABLED=0 GOOS=linux go build -o yaml-server ./cmd/server/main.go
 
-# Этап 3: Финальный образ (берем Python, чтобы потом добавить ansible-lint)
-FROM python:3.11-slim
+# Этап 3: Финальный сверхлегкий образ
+FROM alpine:latest
 WORKDIR /app
-
-# Сразу ставим линтеры на будущее (пока собирается образ, интернет есть)
-RUN pip install --no-cache-dir yamllint ansible-lint
 
 # Забираем собранный бинарник Go
 COPY --from=backend-builder /app/yaml-server .
