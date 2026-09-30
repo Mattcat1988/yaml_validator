@@ -10,4 +10,5 @@ type ValidationResponse struct {
 	ErrorMsg       string `json:"error_msg,omitempty"`
 	Formatted      string `json:"formatted,omitempty"`
 	LinterWarnings string `json:"linter_warnings,omitempty"`
+	ErrorLine      int    `json:"error_line,omitempty"`
 }
